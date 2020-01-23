@@ -4,13 +4,14 @@ export default class DelayedButton extends Component {
 
 	constructor(props) {
 		super(props)
-		this.state = { onDelayedClick: this.props.onDelayedClick, 
-			delay: this.props.delay
-		}
 	}
 
-	handleClick = (event) => { 
-		setTimeout(this.setState({onDelayedClick: event}), this.props.delay)
+	handleClick = (event) => {
+		event.persist()
+		// We have to wrap the onDelayClick into an anonymous function otherwise JS will 
+		// execute the file immediately when the file loads and it will not be a function
+		// when the button click event is executed.
+		setTimeout(() => (this.props.onDelayedClick(event)), this.props.delay)
 	}
 
 	render() {
@@ -18,6 +19,5 @@ export default class DelayedButton extends Component {
 	      	<button onClick={this.handleClick}>Delay Button</button>
 	    )
 	}
-
 
 }

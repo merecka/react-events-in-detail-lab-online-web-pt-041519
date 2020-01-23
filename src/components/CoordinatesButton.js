@@ -4,11 +4,10 @@ export default class CoordinatesButton extends Component {
 
 	constructor(props) {
 		super(props)
-		this.state = { onReceiveCoordinates: this.props.onReceiveCoordinates }
 	}
 
 	handleClick = (event) => {
-		this.setState({ onReceiveCoordinates: [event.clientX, event.clientY]})
+		this.props.onReceiveCoordinates([event.clientX, event.clientY])
 	}
 
 	render() {
